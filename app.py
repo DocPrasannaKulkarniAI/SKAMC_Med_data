@@ -13,13 +13,20 @@ from datetime import datetime
 
 # ─── LOAD CONFIG ─────────────────────────────────────────────────────────────
 try:
-    import config
-    API_KEY     = config.ANTHROPIC_API_KEY
-    AI_MODEL    = config.AI_MODEL
-    INSTITUTION = config.INSTITUTION
-except ImportError:
-    st.error("❌ config.py not found. Please place config.py in the same folder as app.py.")
-    st.stop()
+    # Cloud deployment — reads from Streamlit Secrets
+    API_KEY     = st.secrets["ANTHROPIC_API_KEY"]
+    AI_MODEL    = st.secrets.get("AI_MODEL", "claude-haiku-4-5-20251001")
+    INSTITUTION = st.secrets.get("INSTITUTION", "Sri Kalabyraveshwara Swamy Ayurvedic Medical College, Bangalore")
+except Exception:
+    try:
+        # Local fallback — reads from config.py
+        import config
+        API_KEY     = config.ANTHROPIC_API_KEY
+        AI_MODEL    = config.AI_MODEL
+        INSTITUTION = config.INSTITUTION
+    except ImportError:
+        st.error("❌ config.py not found. Please set up your API key.")
+        st.stop()
 
 if "PASTE-YOUR-KEY-HERE" in API_KEY or not API_KEY.startswith("sk-ant-"):
     st.error("❌ Please open config.py and paste your Anthropic API key into ANTHROPIC_API_KEY.")
