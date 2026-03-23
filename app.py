@@ -232,7 +232,7 @@ def build_excel(records, institution):
     ws.auto_filter.ref = ws.dimensions
 
     meta = wb.create_sheet("Info")
-    meta["A1"] = "Atharva AyurTech — Ayurveda OPD Data Extractor"
+    meta["A1"] = "Ayurveda OPD Data Extractor"
     meta["A2"] = f"Institution: {institution}"
     meta["A3"] = f"Generated: {datetime.now().strftime('%d-%b-%Y  %H:%M')}"
     meta["A4"] = f"Total Records: {len(records)}"
@@ -257,7 +257,7 @@ client = anthropic.Anthropic(api_key=API_KEY)
 
 # ─── SIDEBAR ─────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("### 🌿 Atharva AyurTech")
+    st.markdown("### 🌿 SKAMC")
     st.markdown("**OPD Card Data Extractor**")
     st.divider()
     st.markdown(f"""
@@ -295,7 +295,7 @@ with st.sidebar:
 st.markdown(f"""
 <div class="opd-header">
     <h1>🌿 Ayurveda OPD Card — AI Data Extractor</h1>
-    <p>{INSTITUTION} &nbsp;|&nbsp; Atharva AyurTech Healthcare</p>
+    <p>{INSTITUTION} &nbsp;|&nbsp; SKAMC</p>
     <p>Upload OPD card photos → AI reads printed + handwritten fields → Download Excel / CSV / JSON</p>
 </div>""", unsafe_allow_html=True)
 
@@ -424,6 +424,6 @@ if not st.session_state.records and not uploaded_files:
 # ─── FOOTER ──────────────────────────────────────────────────────────────────
 st.markdown(f"""
 <div class="footer">
-    🌿 Atharva AyurTech Healthcare &nbsp;|&nbsp; {INSTITUTION} &nbsp;|&nbsp;
+    🌿 SKAMC &nbsp;|&nbsp; {INSTITUTION} &nbsp;|&nbsp;
     Powered by Claude AI (Anthropic) &nbsp;|&nbsp; <em>For research & academic use</em>
 </div>""", unsafe_allow_html=True)
